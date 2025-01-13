@@ -2,7 +2,8 @@
 
 A full stack Kotlin + React app with a Moondream 2 Flask micro service that identifies birds.
 
-Inspiration :: https://x.com/prayagbhakar/status/1878537317549285454?s=46
+Inspiration ::
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">In the JVM we trust ☕️ <a href="https://t.co/ji7razBtob">pic.twitter.com/ji7razBtob</a></p>&mdash; 81reap (@PrayagBhakar) <a href="https://twitter.com/PrayagBhakar/status/1878537317549285454?ref_src=twsrc%5Etfw">January 12, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 🚨 :: This project may change a lot and is currently partally documented/implemented. Cleanup will be needed.
 
