@@ -93,7 +93,7 @@ ReactPlayer {
 */
 ```
 
-🧱 WIP 🚧 :: finish spilling the beans
+🧱 WIP 🚧 :: finish spilling the beans 🫘
 
 ## To-Do
 

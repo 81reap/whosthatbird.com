@@ -1,6 +1,8 @@
 # moondream2 Microservice API
 
-## Setup 
+## Quickstart
+
+### 1 :: Setup 
 
 ```bash
 $ python3 -m venv .venv
@@ -8,7 +10,7 @@ $ source .venv/bin/activate
 $ pip install -r requirements.txt
 ```
 
-## Run
+### 2 :: Run
 
 ```bash
 $ python3 -m api

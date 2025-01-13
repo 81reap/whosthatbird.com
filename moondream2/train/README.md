@@ -1,6 +1,8 @@
 # moondream2 Fine Tuning
 
-## Setup 
+## Quickstart
+
+### 1 :: Setup 
 
 🧱 WIP 🚧 :: setting up the dataset
 
@@ -10,7 +12,7 @@ $ source .venv/bin/activate
 $ pip install -r requirements.txt
 ```
 
-## Run
+### 2 :: Run
 
 ```bash
 $ jupyter notebook
