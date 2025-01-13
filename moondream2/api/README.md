@@ -2,7 +2,7 @@
 
 ## Quickstart
 
-### 1 :: Setup 
+### 01 :: Setup 
 
 ```bash
 $ python3 -m venv .venv
@@ -10,7 +10,7 @@ $ source .venv/bin/activate
 $ pip install -r requirements.txt
 ```
 
-### 2 :: Run
+### 02 :: Run
 
 ```bash
 $ python3 -m api

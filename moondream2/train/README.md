@@ -2,7 +2,7 @@
 
 ## Quickstart
 
-### 1 :: Setup 
+### 01 :: Setup 
 
 🧱 WIP 🚧 :: setting up the dataset
 
@@ -12,7 +12,7 @@ $ source .venv/bin/activate
 $ pip install -r requirements.txt
 ```
 
-### 2 :: Run
+### 02 :: Run
 
 ```bash
 $ jupyter notebook
