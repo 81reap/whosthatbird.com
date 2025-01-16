@@ -5,6 +5,7 @@ import emotion.react.css
 import react.FC
 import react.Props
 import react.dom.html.ReactHTML
+import react.router.dom.Link
 
 external interface NavProps : Props {
 		var header: String
@@ -20,7 +21,7 @@ val Nav = FC<NavProps> { props ->
 				}
 				ReactHTML.h1 {
 						css {
-								fontSize = 3.ch
+								fontSize = 3.rem
 								fontWeight = FontWeight.bold
 						}
 						+props.header
@@ -36,11 +37,15 @@ val Nav = FC<NavProps> { props ->
 						borderBottom = Border(2.px, LineStyle.solid, Color("black"))
 				}
 
-				ReactHTML.button {
-						css {
-								marginRight = 2.ch
+				Link {
+						to = "."
+						ReactHTML.button {
+								css {
+										marginRight = 2.ch
+										fontSize = 3.ch
+								}
+								+"\uD83E\uDEB4"
 						}
-						+"\uD83E\uDEB4"
 				}
 
 				ReactHTML.div {
@@ -48,8 +53,24 @@ val Nav = FC<NavProps> { props ->
 								display = Display.flex
 								gap = 1.ch
 						}
-						ReactHTML.button { +"SCAN" }
-						ReactHTML.button { +"DATABASE" }
+						Link {
+								to = "scan"
+								ReactHTML.button {
+										css {
+												fontSize = 3.ch
+										}
+										+"SCAN"
+								}
+						}
+						Link {
+								to = "index"
+								ReactHTML.button {
+										css {
+												fontSize = 3.ch
+										}
+										+"INDEX"
+								}
+						}
 				}
 
 				ReactHTML.div {
@@ -58,6 +79,14 @@ val Nav = FC<NavProps> { props ->
 						}
 				}
 
-				ReactHTML.button { +"GitHub" }
+				Link {
+						to = "https://github.com/81reap/whosthatbird.com"
+						ReactHTML.button {
+								css {
+										fontSize = 3.ch
+								}
+								+"GitHub"
+						}
+				}
 		}
 }

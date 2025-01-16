@@ -1,5 +1,3 @@
-import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
-
 plugins {
     kotlin("multiplatform") version "2.1.0"
     // application
@@ -61,10 +59,9 @@ kotlin {
                 implementation(project.dependencies.enforcedPlatform("org.jetbrains.kotlin-wrappers:kotlin-wrappers-bom:$kotlinWrappersVersion"))
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-emotion")
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-react")
+                implementation("org.jetbrains.kotlin-wrappers:kotlin-react-use")
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom")
-                //implementation("org.jetbrains.kotlin-wrappers:kotlin-react-query")
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-react-router-dom")
-                //implementation("org.jetbrains.kotlin-wrappers:kotlin-tanstack-react-table")
 
                 //Video Player
                 //implementation(npm("react-player", "2.16.0"))
@@ -91,12 +88,12 @@ fun isNonStable(version: String): Boolean {
     val isStable = stableKeyword || regex.matches(version)
     return isStable.not()
 }
-tasks.withType<DependencyUpdatesTask> {
+tasks.withType<com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask> {
     rejectVersionIf {
         isNonStable(candidate.version) && !isNonStable(currentVersion)
     }
 }
-tasks.named<DependencyUpdatesTask>("dependencyUpdates").configure {
+tasks.named<com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask>("dependencyUpdates").configure {
     checkForGradleUpdate = true
     outputFormatter = "html"
     outputDir = "build/reports/dependency"
