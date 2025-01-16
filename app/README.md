@@ -7,7 +7,9 @@ If you have purchased an IntelliJ IDEA Licence, then install IntelliJ IDEA Ultim
 
 ### 02 :: Setup
 ```bash
-$ ./gradlew build
+$ ./gradlew dependencyUpdates
+$ ./gradlew kotlinUpgradeYarnLock
+$ ./gradlew clean build --refresh-dependencies
 ```
 
 ### 03 :: Run
