@@ -1,7 +1,7 @@
 import components.Chat
+import components.History
 import components.Nav
-import components.SideBar
-import csstype.*
+import web.cssom.*
 import emotion.react.css
 import kotlinx.coroutines.MainScope
 import react.FC
@@ -33,9 +33,7 @@ val App = FC<Props> {
 						fontFamily = FontFamily.monospace
 						backgroundColor = NamedColor.white
 						border = Border(2.px, LineStyle.solid, Color("black"))
-						width = 100.pct
-						maxWidth = 80.ch
-						margin = Margin(0.px, Auto.auto)
+						margin = 1.ch
 				}
 
 				Nav {
@@ -46,7 +44,7 @@ val App = FC<Props> {
 						css {
 								display = Display.flex
 						}
-						SideBar {
+						History {
 								contacts = testContacts
 						}
 						Chat {

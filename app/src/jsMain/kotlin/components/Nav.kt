@@ -1,6 +1,6 @@
 package components
 
-import csstype.*
+import web.cssom.*
 import emotion.react.css
 import react.FC
 import react.Props
@@ -14,13 +14,13 @@ val Nav = FC<NavProps> { props ->
 		ReactHTML.header {
 				css {
 						borderBottom = Border(2.px, LineStyle.solid, Color("black"))
-						padding = 0.5.rem
+						padding = 1.ch
 						textAlign = TextAlign.center
 						position = Position.relative
 				}
 				ReactHTML.h1 {
 						css {
-								fontSize = 1.25.rem
+								fontSize = 3.ch
 								fontWeight = FontWeight.bold
 						}
 						+props.header
@@ -30,7 +30,7 @@ val Nav = FC<NavProps> { props ->
 		ReactHTML.nav {
 				css {
 						backgroundColor = Color("#e5e5e5")
-						padding = Padding(0.5.rem, 1.rem)
+						padding = 1.ch
 						display = Display.flex
 						alignItems = AlignItems.center
 						borderBottom = Border(2.px, LineStyle.solid, Color("black"))
@@ -38,19 +38,18 @@ val Nav = FC<NavProps> { props ->
 
 				ReactHTML.button {
 						css {
-								marginRight = 1.rem
+								marginRight = 2.ch
 						}
-						+"✶"
+						+"\uD83E\uDEB4"
 				}
 
 				ReactHTML.div {
 						css {
 								display = Display.flex
-								gap = 1.rem
+								gap = 1.ch
 						}
-						ReactHTML.button { +"FILE" }
-						ReactHTML.button { +"EDIT" }
-						ReactHTML.button { +"VIEW" }
+						ReactHTML.button { +"SCAN" }
+						ReactHTML.button { +"DATABASE" }
 				}
 
 				ReactHTML.div {
@@ -59,6 +58,6 @@ val Nav = FC<NavProps> { props ->
 						}
 				}
 
-				ReactHTML.button { +"HELP" }
+				ReactHTML.button { +"GitHub" }
 		}
 }
