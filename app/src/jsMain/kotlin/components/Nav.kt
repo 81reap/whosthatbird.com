@@ -42,7 +42,7 @@ val Nav = FC<NavProps> { props ->
 						ReactHTML.button {
 								css {
 										marginRight = 2.ch
-										fontSize = 3.ch
+										fontSize = 2.5.rem
 								}
 								+"\uD83E\uDEB4"
 						}
@@ -57,7 +57,7 @@ val Nav = FC<NavProps> { props ->
 								to = "scan"
 								ReactHTML.button {
 										css {
-												fontSize = 3.ch
+												fontSize = 2.5.rem
 										}
 										+"SCAN"
 								}
@@ -66,7 +66,7 @@ val Nav = FC<NavProps> { props ->
 								to = "index"
 								ReactHTML.button {
 										css {
-												fontSize = 3.ch
+												fontSize = 2.5.rem
 										}
 										+"INDEX"
 								}
@@ -83,7 +83,7 @@ val Nav = FC<NavProps> { props ->
 						to = "https://github.com/81reap/whosthatbird.com"
 						ReactHTML.button {
 								css {
-										fontSize = 3.ch
+										fontSize = 2.5.rem
 								}
 								+"GitHub"
 						}

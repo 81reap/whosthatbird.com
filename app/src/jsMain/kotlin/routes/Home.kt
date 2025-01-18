@@ -35,7 +35,7 @@ val Home = FC<Props> {
 						}
 						p {
 								css {
-										fontSize = 1.5.rem
+										fontSize = 2.rem
 										color = Color("#666")
 										marginBottom = 2.rem
 								}
@@ -55,7 +55,7 @@ val Home = FC<Props> {
 										button {
 												css {
 														padding = Padding(1.rem, 2.rem)
-														fontSize = 1.25.rem
+														fontSize = 1.75.rem
 														backgroundColor = Color("#90EE90")
 														border = Border(2.px, LineStyle.solid, Color("black"))
 														cursor = Cursor.pointer
@@ -71,7 +71,7 @@ val Home = FC<Props> {
 										button {
 												css {
 														padding = Padding(1.rem, 2.rem)
-														fontSize = 1.25.rem
+														fontSize = 1.75.rem
 														backgroundColor = Color("#e5e5e5")
 														border = Border(2.px, LineStyle.solid, Color("black"))
 														cursor = Cursor.pointer

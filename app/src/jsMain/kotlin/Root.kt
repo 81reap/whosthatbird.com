@@ -85,7 +85,7 @@ val Root = FC<Props> {
 								flexShrink = number(0.0)
 						}
 						Nav {
-								header = "Who's that bird?"
+								header = "\uD83E\uDD9C Who's that bird?"
 						}
 				}
 

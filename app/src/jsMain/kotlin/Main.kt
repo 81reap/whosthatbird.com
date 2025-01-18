@@ -18,7 +18,7 @@ import routes.Scan
 fun main() {
 		val container = document.createElement(div)
 		container.style.apply {
-				background = "red"
+				background = "#90EE90"
 				width = "100%"
 				height = "100%"
 				overflow = "auto"
