@@ -34,6 +34,7 @@ kotlin {
                 cssSupport {
                     enabled.set(true)
                 }
+                devServer = devServer?.copy(port = 8081)
             }
         }
         binaries.executable()
@@ -44,9 +45,6 @@ kotlin {
             dependencies {
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")
-
-                // If you do Ktor client calls from common code (optional):
-                // implementation("io.ktor:ktor-client-core:$ktorVersion")
             }
         }
 
@@ -57,6 +55,7 @@ kotlin {
                 implementation("io.ktor:ktor-server-netty:$ktorVersion")
                 implementation("io.ktor:ktor-server-content-negotiation:$ktorVersion")
                 implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
+
                 // (Optional) CORS, compression, logging, etc.
                 implementation("io.ktor:ktor-server-cors:$ktorVersion")
                 implementation("io.ktor:ktor-server-core:$ktorVersion")
@@ -69,10 +68,6 @@ kotlin {
 
         val jsMain by getting {
             dependencies {
-                // Ktor client JS if you fetch data from your server in the browser
-                // implementation("io.ktor:ktor-client-js:$ktorVersion")
-                // implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
-
                 // React + wrappers BOM
                 implementation(project.dependencies.enforcedPlatform("org.jetbrains.kotlin-wrappers:kotlin-wrappers-bom:$kotlinWrappersVersion"))
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-react")
@@ -81,7 +76,14 @@ kotlin {
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-react-router-dom")
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-emotion")
 
+                // NPM Dev Dependencies
                 implementation(devNpm("html-webpack-plugin", "5.6.3"))
+
+                // Ktor client for fetching data
+                implementation("io.ktor:ktor-client-core:$ktorVersion")
+                implementation("io.ktor:ktor-client-js:$ktorVersion")
+                implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
+                implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
             }
         }
 
