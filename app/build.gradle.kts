@@ -58,8 +58,9 @@ kotlin {
                 implementation("io.ktor:ktor-server-content-negotiation:$ktorVersion")
                 implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
                 // (Optional) CORS, compression, logging, etc.
-                // implementation("io.ktor:ktor-server-cors:$ktorVersion")
-                // implementation("io.ktor:ktor-server-compression:$ktorVersion")
+                implementation("io.ktor:ktor-server-cors:$ktorVersion")
+                implementation("io.ktor:ktor-server-core:$ktorVersion")
+                implementation("io.ktor:ktor-server-compression:$ktorVersion")
 
                 // Logging
                 implementation("ch.qos.logback:logback-classic:$logbackVersion")
@@ -79,6 +80,8 @@ kotlin {
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-react-router")
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-react-router-dom")
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-emotion")
+
+                implementation(devNpm("html-webpack-plugin", "5.6.3"))
             }
         }
 

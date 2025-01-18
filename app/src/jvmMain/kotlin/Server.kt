@@ -6,9 +6,11 @@ import io.ktor.server.response.*
 import io.ktor.server.request.*
 import io.ktor.server.routing.*
 import io.ktor.server.plugins.contentnegotiation.*
+import io.ktor.http.*
+import io.ktor.server.http.content.*
 import io.ktor.serialization.kotlinx.json.*
+import java.io.*
 
-// You already have these in Data.kt
 val testMessages = arrayOf(
 		Message(1, "user", "Why are they all looking at me?"),
 		Message(2, "system", "Because my subconscious feels that someone else is creating this world. The more you change things, the quicker the projections start to converge on you."),
@@ -32,10 +34,7 @@ fun main() {
 						json()  // ktor-serialization-kotlinx-json
 				}
 				routing {
-//						static("/") {
-//								resources("static")
-//								defaultResource("static/index.html")
-//						}
+						staticFiles("/", File("static"))
 						get("/api/messages") {
 								// Return messages as JSON
 								call.respond(testMessages)

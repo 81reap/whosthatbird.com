@@ -23,6 +23,7 @@ $ ./gradlew jsBrowserDevelopmentRun
 $ ./gradlew jsBrowserDevelopmentRun --continuous
 
 ## JAR [WIP]
+$ ./gradlew jvmJar
 $ ./gradlew installDist
 $ ./gradlew installDist -PisProduction
 $ jar build/install/PROJECT_NAME/bin/PROJECT_NAME
