@@ -10,19 +10,21 @@ import react.router.dom.Link
 external interface NavProps : Props {
 		var header: String
 }
-
 val Nav = FC<NavProps> { props ->
+
 		ReactHTML.header {
 				css {
-						borderBottom = Border(2.px, LineStyle.solid, Color("black"))
-						padding = 1.ch
+						borderBottom = Border(2.px, LineStyle.solid, NamedColor.black)
+						padding = 0.75.rem
 						textAlign = TextAlign.center
 						position = Position.relative
+						backgroundColor = NamedColor.cornflowerblue
 				}
 				ReactHTML.h1 {
 						css {
-								fontSize = 3.rem
+								fontSize = 2.rem
 								fontWeight = FontWeight.bold
+								margin = 0.px
 						}
 						+props.header
 				}
@@ -30,21 +32,18 @@ val Nav = FC<NavProps> { props ->
 
 		ReactHTML.nav {
 				css {
-						backgroundColor = Color("#e5e5e5")
-						padding = 1.ch
+						backgroundColor = NamedColor.darksalmon
+						padding = 0.5.rem
 						display = Display.flex
 						alignItems = AlignItems.center
-						borderBottom = Border(2.px, LineStyle.solid, Color("black"))
+						borderBottom = Border(1.px, LineStyle.solid, NamedColor.black)
+						gap = 1.rem
 				}
 
 				Link {
 						to = "."
-						ReactHTML.button {
-								css {
-										marginRight = 2.ch
-										fontSize = 2.5.rem
-								}
-								+"\uD83E\uDEB4"
+						NavButton{
+								text = "\uD83E\uDEB4"
 						}
 				}
 
@@ -55,20 +54,14 @@ val Nav = FC<NavProps> { props ->
 						}
 						Link {
 								to = "scan"
-								ReactHTML.button {
-										css {
-												fontSize = 2.5.rem
-										}
-										+"SCAN"
+								NavButton{
+										text = "SCAN"
 								}
 						}
 						Link {
 								to = "index"
-								ReactHTML.button {
-										css {
-												fontSize = 2.5.rem
-										}
-										+"INDEX"
+								NavButton{
+										text = "INDEX"
 								}
 						}
 				}
@@ -81,12 +74,25 @@ val Nav = FC<NavProps> { props ->
 
 				Link {
 						to = "https://github.com/81reap/whosthatbird.com"
-						ReactHTML.button {
-								css {
-										fontSize = 2.5.rem
-								}
-								+"GitHub"
+						NavButton{
+								text = "GitHub"
 						}
 				}
+		}
+}
+
+external interface NavButtonProps : Props {
+		var text: String
+}
+val NavButton = FC<NavButtonProps> { props ->
+		ReactHTML.button {
+				css {
+						fontSize = 1.25.rem
+						height = 100.pct
+						cursor = Cursor.pointer
+						border = Border(1.px, LineStyle.solid, NamedColor.black)
+						backgroundColor = NamedColor.antiquewhite
+				}
+				+props.text
 		}
 }

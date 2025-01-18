@@ -4,40 +4,37 @@ import web.cssom.*
 import emotion.react.css
 import react.FC
 import react.Props
-import react.create
 import react.dom.html.ReactHTML.div
 import react.dom.html.ReactHTML.h1
 import react.dom.html.ReactHTML.h2
 import react.dom.html.ReactHTML.p
 import react.dom.html.ReactHTML.button
-import react.dom.html.ReactHTML.img
 import react.router.dom.Link
 
 val Home = FC<Props> {
 		div {
 				css {
-						padding = Padding(4.rem, 2.rem)
+						padding = Padding(2.rem, 1.rem)
 						margin = Margin(0.px, Auto.auto)
 						textAlign = TextAlign.center
 				}
 
-				// Hero Section
 				div {
 						css {
-								marginBottom = 4.rem
+								marginBottom = 2.rem
 						}
 						h1 {
 								css {
-										fontSize = 4.rem
-										marginBottom = 1.rem
+										fontSize = 2.5.rem
+										marginBottom = 0.5.rem
 								}
-								+"🦜 Who's that bird?"
+								+"\uD83E\uDD9C Who's that bird?"
 						}
 						p {
 								css {
-										fontSize = 2.rem
+										fontSize = 1.25.rem
 										color = Color("#666")
-										marginBottom = 2.rem
+										marginBottom = 1.rem
 								}
 								+"Your AI-powered bird identification companion"
 						}
@@ -50,36 +47,32 @@ val Home = FC<Props> {
 										gap = 1.rem
 										marginTop = 2.rem
 								}
+
 								Link {
 										to = "scan"
 										button {
 												css {
-														padding = Padding(1.rem, 2.rem)
-														fontSize = 1.75.rem
-														backgroundColor = Color("#90EE90")
-														border = Border(2.px, LineStyle.solid, Color("black"))
+														padding = Padding(0.75.rem, 1.5.rem)
+														fontSize = 1.rem
+														backgroundColor = NamedColor.springgreen
+														border = Border(1.px, LineStyle.solid, Color("black"))
 														cursor = Cursor.pointer
-														hover {
-																backgroundColor = Color("#7BC67B")
-														}
 												}
-												+"Start Scanning 📸"
+												+"Start Scanning \uD83D\uDCF8"
 										}
 								}
+
 								Link {
 										to = "index"
 										button {
 												css {
-														padding = Padding(1.rem, 2.rem)
-														fontSize = 1.75.rem
-														backgroundColor = Color("#e5e5e5")
-														border = Border(2.px, LineStyle.solid, Color("black"))
+														padding = Padding(0.75.rem, 1.5.rem)
+														fontSize = 1.rem
+														backgroundColor = NamedColor.blanchedalmond
+														border = Border(1.px, LineStyle.solid, Color("black"))
 														cursor = Cursor.pointer
-														hover {
-																backgroundColor = Color("#d1d1d1")
-														}
 												}
-												+"View Bird Index 📚"
+												+"View Bird Index \uD83D\uDCD3"
 										}
 								}
 						}
@@ -90,7 +83,7 @@ val Home = FC<Props> {
 								display = Display.flex
 								flexWrap = FlexWrap.wrap
 								gap = 2.rem
-								marginTop = 4.rem
+								marginTop = 2.rem
 								textAlign = TextAlign.left
 								justifyContent = JustifyContent.center
 						}
@@ -98,13 +91,13 @@ val Home = FC<Props> {
 						FeatureCard {
 								title = "Real-time Identification"
 								description = "Point your camera at any bird and get instant identification using advanced AI technology"
-								emoji = "🔍"
+								emoji = "\uD83D\uDD0E"
 						}
 
 						FeatureCard {
 								title = "Comprehensive Database"
 								description = "Collection of 48,000 pictures of the 400 birds in North America by The Cornell Lab of Ornithology"
-								emoji = "📊"
+								emoji = "\uD83D\uDCCA"
 						}
 
 						FeatureCard {
@@ -131,9 +124,9 @@ external interface FeatureCardProps : Props {
 val FeatureCard = FC<FeatureCardProps> { props ->
 		div {
 				css {
-						border = Border(2.px, LineStyle.solid, Color("black"))
-						borderRadius = 8.px
-						padding = 2.rem
+						border = Border(1.px, LineStyle.solid, Color("black"))
+						borderRadius = 6.px
+						padding = 1.5.rem
 						backgroundColor = Color("#f9f9f9")
 						flexBasis = 80.ch
 						flexGrow = number(1.0)
@@ -143,22 +136,22 @@ val FeatureCard = FC<FeatureCardProps> { props ->
 				}
 				div {
 						css {
-								fontSize = 2.rem
-								marginBottom = 1.rem
+								fontSize = 1.5.rem
+								marginBottom = 0.5.rem
 						}
 						+props.emoji
 				}
 				h2 {
 						css {
-								fontSize = 1.5.rem
-								marginBottom = 1.rem
+								fontSize = 1.25.rem
+								marginBottom = 0.5.rem
 						}
 						+props.title
 				}
 				p {
 						css {
 								color = Color("#666")
-								fontSize = 1.15.rem
+								fontSize = 1.rem
 								lineHeight = 1.5.rem
 						}
 						+props.description
