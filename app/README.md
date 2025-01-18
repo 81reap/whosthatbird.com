@@ -14,10 +14,18 @@ $ ./gradlew clean build --refresh-dependencies
 
 ### 03 :: Run
 ```bash
-$ ./gradlew jsBrowserDevelopmentRun
+## Backend
+$ ./gradlew run
 
+## Frontend
+$ ./gradlew jsBrowserDevelopmentRun
 # With Hot Reload
 $ ./gradlew jsBrowserDevelopmentRun --continuous
+
+## JAR [WIP]
+$ ./gradlew installDist
+$ ./gradlew installDist -PisProduction
+$ jar build/install/PROJECT_NAME/bin/PROJECT_NAME
 ```
 
 ### 🐞Known Bug ::  MacOS :: `.DS_Store` will clog up gradle

@@ -1,6 +1,13 @@
+val kotlinVersion          = "1.9.0"
+val coroutinesVersion      = "1.10.1"
+val serializationVersion   = "1.8.0"
+val ktorVersion            = "3.0.3"
+val logbackVersion         = "1.5.16"
+val kotlinWrappersVersion  = "2025.1.3"
+
 plugins {
     kotlin("multiplatform") version "2.1.0"
-    // application
+    application
     kotlin("plugin.serialization") version "2.1.0"
     id("com.github.ben-manes.versions") version "0.51.0"
 }
@@ -8,16 +15,19 @@ plugins {
 group = "org.bhakar"
 version = "1.0-SNAPSHOT"
 
-val kotlinWrappersVersion = "2025.1.3"
-
 repositories {
     mavenCentral()
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    kotlinOptions.jvmTarget = "21"
 }
 
 kotlin {
     jvm {
         withJava()
     }
+
     js(IR) {
         browser {
             commonWebpackConfig {
@@ -28,55 +38,102 @@ kotlin {
         }
         binaries.executable()
     }
+
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.1")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.0")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")
+
+                // If you do Ktor client calls from common code (optional):
+                // implementation("io.ktor:ktor-client-core:$ktorVersion")
             }
         }
-//        val commonTest by getting {
-//            dependencies {
-//                implementation(kotlin("test"))
-//            }
-//        }
 
         val jvmMain by getting {
             dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.1")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.0")
+                // Ktor server
+                implementation("io.ktor:ktor-server-core-jvm:$ktorVersion")
+                implementation("io.ktor:ktor-server-netty:$ktorVersion")
+                implementation("io.ktor:ktor-server-content-negotiation:$ktorVersion")
+                implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
+                // (Optional) CORS, compression, logging, etc.
+                // implementation("io.ktor:ktor-server-cors:$ktorVersion")
+                // implementation("io.ktor:ktor-server-compression:$ktorVersion")
+
+                // Logging
+                implementation("ch.qos.logback:logback-classic:$logbackVersion")
             }
         }
-//        val jvmTest by getting {
-//            dependencies {
-//                implementation(kotlin("test"))
-//            }
-//        }
 
         val jsMain by getting {
             dependencies {
-                //React, React DOM, Css + Wrappers
+                // Ktor client JS if you fetch data from your server in the browser
+                // implementation("io.ktor:ktor-client-js:$ktorVersion")
+                // implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
+
+                // React + wrappers BOM
                 implementation(project.dependencies.enforcedPlatform("org.jetbrains.kotlin-wrappers:kotlin-wrappers-bom:$kotlinWrappersVersion"))
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-emotion")
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-react")
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-react-use")
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom")
+                implementation("org.jetbrains.kotlin-wrappers:kotlin-react-router")
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-react-router-dom")
-
-                //Video Player
-                //implementation(npm("react-player", "2.16.0"))
-
-                //Coroutines & serialization
-                implementation("org.jetbrains.kotlin:kotlinx-atomicfu-runtime:1.8.20-RC")
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.1")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.0")
+                implementation("org.jetbrains.kotlin-wrappers:kotlin-emotion")
             }
         }
-//        val jsTest by getting {
-//            dependencies {
-//                implementation(kotlin("test"))
-//            }
-//        }
+
+        // (Optional) Test source sets omitted for brevity
+    }
+}
+
+application {
+    mainClass.set("ServerKt")
+    applicationDefaultJvmArgs = listOf("-Dio.ktor.development=true")
+}
+
+/* SUPER JAR
+ * This task it to take the front end and cram it into the backend to make one SUPER JAR
+ */
+tasks.getByName<Jar>("jvmJar") {
+    // We want the *production* JS if we do `./gradlew installDist` or a production build
+    val isProduction = project.hasProperty("isProduction")
+            || project.gradle.startParameter.taskNames.any { it.contains("installDist") }
+
+    val webpackTaskName = if (isProduction) {
+        "jsBrowserProductionWebpack"
+    } else {
+        "jsBrowserDevelopmentWebpack"
+    }
+    val webpackTask = tasks.getByName<org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpack>(webpackTaskName)
+
+    dependsOn(webpackTask)
+
+    // Put the JS bundles inside the JAR's resources, e.g. at /web
+    from(File(webpackTask.destinationDirectory, webpackTask.outputFileName)) {
+        into("static")
+    }
+}
+
+//------------------------------------------------------
+// Make sure the JAR is on the classpath when we run
+//------------------------------------------------------
+tasks.getByName<JavaExec>("run") {
+    // Force the `run` task to run from the jar that includes the JS
+    classpath(tasks.getByName<Jar>("jvmJar"))
+}
+
+//------------------------------------------------------
+// (Optional) For a typical "stage" or "installDist" approach
+//------------------------------------------------------
+distributions {
+    main {
+        contents {
+            // Put the JAR into /lib
+            from(layout.buildDirectory.dir("libs")) {
+                rename("${rootProject.name}-jvm", rootProject.name)
+                into("lib")
+            }
+        }
     }
 }
 
