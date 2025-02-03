@@ -18,7 +18,7 @@ import react.router.dom.createHashRouter
 import routes.Home
 import routes.Index
 import routes.NotFound
-import routes.Scan
+import routes.Chat
 
 private val mainScope = MainScope()
 
@@ -35,8 +35,8 @@ val Router = FC<Props> {
 														Component = Home,
 												),
 												RouteObject(
-														path = "scan",
-														Component = WIP //Scan,
+														path = "Chat",
+														Component = Chat,
 												),
 												RouteObject(
 														path = "index",

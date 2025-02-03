@@ -61,13 +61,13 @@ kotlin {
         val jsMain by getting {
             dependencies {
                 //React, React DOM, Css + Wrappers
-                implementation(project.dependencies.enforcedPlatform("org.jetbrains.kotlin-wrappers:kotlin-wrappers-bom:$kotlinWrappersVersion"))
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-emotion")
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-react")
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-react-use")
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom")
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-react-router-dom")
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-tanstack-react-query")
+                implementation(project.dependencies.enforcedPlatform("org.jetbrains.kotlin-external:kotlin-external-bom:$kotlinWrappersVersion"))
+                implementation("org.jetbrains.kotlin-external:kotlin-emotion")
+                implementation("org.jetbrains.kotlin-external:kotlin-react")
+                implementation("org.jetbrains.kotlin-external:kotlin-react-use")
+                implementation("org.jetbrains.kotlin-external:kotlin-react-dom")
+                implementation("org.jetbrains.kotlin-external:kotlin-react-router-dom")
+                implementation("org.jetbrains.kotlin-external:kotlin-tanstack-react-query")
 
                 //Video Player
                 //implementation(npm("react-player", "2.16.0"))

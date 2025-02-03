@@ -1,15 +1,16 @@
-val kotlinVersion          = "1.9.0"
+val kotlinVersion          = "2.1.10"
 val coroutinesVersion      = "1.10.1"
 val serializationVersion   = "1.8.0"
 val ktorVersion            = "3.0.3"
 val logbackVersion         = "1.5.16"
 val kotlinWrappersVersion  = "2025.1.3"
+val kotlinxHtmlVersion     = "0.12.0"
 
 plugins {
-    kotlin("multiplatform") version "2.1.0"
+    kotlin("multiplatform") version "2.1.10"
     application
-    kotlin("plugin.serialization") version "2.1.0"
-    id("com.github.ben-manes.versions") version "0.51.0"
+    kotlin("plugin.serialization") version "2.1.10"
+    id("com.github.ben-manes.versions") version "0.52.0"
 }
 
 group = "org.bhakar"
@@ -24,7 +25,7 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
 }
 
 kotlin {
-    jvm {
+    jvm() {
         withJava()
     }
 
@@ -34,7 +35,13 @@ kotlin {
                 cssSupport {
                     enabled.set(true)
                 }
-                devServer = devServer?.copy(port = 8081)
+                devServer = devServer?.copy(
+                    port = 8081
+                )
+                headers {
+
+                }
+                println(devServer)
             }
         }
         binaries.executable()
@@ -43,6 +50,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                implementation("org.jetbrains.kotlinx:kotlinx-html:$kotlinxHtmlVersion")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")
             }
@@ -76,8 +84,13 @@ kotlin {
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-react-router-dom")
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-emotion")
 
-                // NPM Dev Dependencies
+                // NPM Dependencies
                 implementation(devNpm("html-webpack-plugin", "5.6.3"))
+                implementation(npm("@huggingface/transformers", "3.3.2"))
+                //implementation(npm("@xenova/transformers", "2.17.2"))
+
+                implementation(npm("dompurify", "3.1.2"))
+                implementation(npm("marked", "4.0.2"))
 
                 // Ktor client for fetching data
                 implementation("io.ktor:ktor-client-core:$ktorVersion")

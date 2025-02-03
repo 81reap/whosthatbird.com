@@ -53,9 +53,9 @@ val Nav = FC<NavProps> { props ->
 								gap = 1.ch
 						}
 						Link {
-								to = "scan"
+								to = "Chat"
 								NavButton{
-										text = "SCAN"
+										text = "CHAT"
 								}
 						}
 						Link {

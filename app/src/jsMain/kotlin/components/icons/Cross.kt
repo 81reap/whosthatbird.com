@@ -5,10 +5,10 @@ import react.FC
 import react.Props
 import react.dom.html.ReactHTML.img
 
-external interface GitHubProps : Props {
+external interface CrossProps : Props {
 		var size: Double
 }
-val GitHub = FC<GitHubProps> { props ->
+val Cross = FC<CrossProps> { props ->
 		img {
 				css {
 						height = props.size.rem

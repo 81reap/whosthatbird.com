@@ -5,10 +5,10 @@ import react.FC
 import react.Props
 import react.dom.html.ReactHTML.img
 
-external interface GitHubProps : Props {
+external interface ArrowRightProps : Props {
 		var size: Double
 }
-val GitHub = FC<GitHubProps> { props ->
+val ArrowRight = FC<ArrowRightProps> { props ->
 		img {
 				css {
 						height = props.size.rem
