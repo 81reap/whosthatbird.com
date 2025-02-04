@@ -38,9 +38,6 @@ kotlin {
                 devServer = devServer?.copy(
                     port = 8081
                 )
-                headers {
-
-                }
                 println(devServer)
             }
         }

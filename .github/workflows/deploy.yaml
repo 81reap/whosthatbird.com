@@ -1,0 +1,45 @@
+name: Build and Deploy Frontend to Cloudflare Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Checkout the repository
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # 2. Set up Java (needed for Gradle)
+      - name: Set Up Java 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      # 3. Set up Node.js (if your build needs Node)
+      - name: Set Up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      # 4. Ensure your Gradle wrapper is executable
+      - name: Grant Execute Permission for gradlew
+        run: chmod +x app/gradlew
+
+      # 5. Build the Kotlin + React frontend
+      - name: Build Frontend
+        working-directory: app
+        run: ./gradlew jsBrowserProductionWebpack
+
+      # 6. Deploy the built static files to Cloudflare Pages using Wrangler
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy app/build/kotlin-webpack/js/productionExecutable --project-name=whosthatbird-com
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
