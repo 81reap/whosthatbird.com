@@ -38,7 +38,7 @@ kotlin {
                 devServer = devServer?.copy(
                     port = 8081
                 )
-                println(devServer)
+                sourceMaps = true
             }
         }
         binaries.executable()
@@ -104,6 +104,10 @@ kotlin {
 application {
     mainClass.set("ServerKt")
     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=true")
+}
+
+tasks.named<Copy>("jsBrowserDistribution") {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }
 
 /* SUPER JAR

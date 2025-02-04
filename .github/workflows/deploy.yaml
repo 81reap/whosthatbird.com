@@ -33,7 +33,7 @@ jobs:
       # 5. Build the Kotlin + React frontend
       - name: Build Frontend
         working-directory: app
-        run: ./gradlew jsBrowserProductionWebpack
+        run: ./gradlew jsBrowserDistribution
 
       # 6. Deploy the built static files to Cloudflare Pages using Wrangler
       - name: Deploy to Cloudflare Pages
@@ -41,5 +41,4 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy app/build/kotlin-webpack/js/productionExecutable --project-name=whosthatbird-com
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          command: pages deploy app/build/dist/js/productionExecutable --project-name=whosthatbird-com

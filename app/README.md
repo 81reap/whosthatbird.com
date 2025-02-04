@@ -23,8 +23,8 @@ $ ./gradlew clean build --refresh-dependencies
 $ ./gradlew run
 
 ## Run the Frontend
-$ ./gradlew jsBrowserDevelopmentRun
-# or w/ Hot Reload
+$ ./gradlew jsBrowserProductionRun
+# or Dev w/ Hot Reload
 $ ./gradlew jsBrowserDevelopmentRun --continuous
 
 ## JAR [WIP]
